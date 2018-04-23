@@ -33,7 +33,7 @@ import starling.rendering.Program;
  * ...
  * @author Matse
  */
-class FlashLightFilter extends FragmentFilter 
+class FlashlightFilter extends FragmentFilter 
 {
 	public var x(get, set):Float;
 	public var y(get, set):Float;
@@ -65,7 +65,7 @@ class FlashLightFilter extends FragmentFilter
 	private function set_x(value:Float):Float
 	{
 		this._x = value;
-		cast(this.effect, FlashLightEffect).x = value;
+		cast(this.effect, FlashlightEffect).x = value;
 		setRequiresRedraw();
 		return value;
 	}
@@ -74,7 +74,7 @@ class FlashLightFilter extends FragmentFilter
 	private function set_y(value:Float):Float
 	{
 		this._y = value;
-		cast(this.effect, FlashLightEffect).y = value;
+		cast(this.effect, FlashlightEffect).y = value;
 		setRequiresRedraw();
 		return value;
 	}
@@ -83,86 +83,86 @@ class FlashLightFilter extends FragmentFilter
 	private function set_angle(value:Float):Float
 	{
 		this._angle = value;
-		cast(this.effect, FlashLightEffect).angle = value;
+		cast(this.effect, FlashlightEffect).angle = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_outerCone():Float { return cast(this.effect, FlashLightEffect).outerCone; }
+	private function get_outerCone():Float { return cast(this.effect, FlashlightEffect).outerCone; }
 	private function set_outerCone(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).outerCone = value;
+		cast(this.effect, FlashlightEffect).outerCone = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_innerCone():Float { return cast(this.effect, FlashLightEffect).innerCone; }
+	private function get_innerCone():Float { return cast(this.effect, FlashlightEffect).innerCone; }
 	private function set_innerCone(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).innerCone = value;
+		cast(this.effect, FlashlightEffect).innerCone = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_azimuth():Float { return cast(this.effect, FlashLightEffect).azimuth; }
+	private function get_azimuth():Float { return cast(this.effect, FlashlightEffect).azimuth; }
 	private function set_azimuth(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).azimuth = value;
+		cast(this.effect, FlashlightEffect).azimuth = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_attenuation1():Float { return cast(this.effect, FlashLightEffect).a1; }
+	private function get_attenuation1():Float { return cast(this.effect, FlashlightEffect).a1; }
 	private function set_attenuation1(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).a1 = value;
+		cast(this.effect, FlashlightEffect).a1 = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_attenuation2():Float { return cast(this.effect, FlashLightEffect).a2; }
+	private function get_attenuation2():Float { return cast(this.effect, FlashlightEffect).a2; }
 	private function set_attenuation2(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).a2 = value;
+		cast(this.effect, FlashlightEffect).a2 = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_attenuation3():Float { return cast(this.effect, FlashLightEffect).a3; }
+	private function get_attenuation3():Float { return cast(this.effect, FlashlightEffect).a3; }
 	private function set_attenuation3(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).a3 = value;
+		cast(this.effect, FlashlightEffect).a3 = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_red():Float { return cast(this.effect, FlashLightEffect).r; }
+	private function get_red():Float { return cast(this.effect, FlashlightEffect).r; }
 	private function set_red(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).r = value;
+		cast(this.effect, FlashlightEffect).r = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_green():Float { return cast(this.effect, FlashLightEffect).g; }
+	private function get_green():Float { return cast(this.effect, FlashlightEffect).g; }
 	private function set_green(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).g = value;
+		cast(this.effect, FlashlightEffect).g = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
-	private function get_blue():Float { return cast(this.effect, FlashLightEffect).b; }
+	private function get_blue():Float { return cast(this.effect, FlashlightEffect).b; }
 	private function set_blue(value:Float):Float
 	{
-		cast(this.effect, FlashLightEffect).b = value;
+		cast(this.effect, FlashlightEffect).b = value;
 		setRequiresRedraw();
 		return value;
 	}
 	
 	override private function createEffect():FilterEffect
 	{
-		var effect:FlashLightEffect = new FlashLightEffect();
+		var effect:FlashlightEffect = new FlashlightEffect();
 		effect.x = this._x;
 		effect.y = this._y;
 		effect.angle = this._angle;
@@ -172,7 +172,7 @@ class FlashLightFilter extends FragmentFilter
 }
 
 
-class FlashLightEffect extends FilterEffect
+class FlashlightEffect extends FilterEffect
 {
 	private static var RADIAN:Float = Math.PI / 180;
 	
