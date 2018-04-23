@@ -37,6 +37,12 @@ class SineWaveFilter extends FragmentFilter
 {
 	private static inline var MIN_PADDING:Int = 25;
 	
+	public var amplitude(get, set):Float;
+	public var frequency(get, set):Float;
+	public var ticker(get, set):Float;
+	public var alpha(get, set):Float;
+	public var isHorizontal(get, set):Bool;
+	
 	private var _amplitude:Float;
 	private var _ticker:Float;
 	private var _frequency:Float;
