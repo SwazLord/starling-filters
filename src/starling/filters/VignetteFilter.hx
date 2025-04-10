@@ -20,7 +20,7 @@
  *	THE SOFTWARE.
  */
 
-package starling.extensions.filters;
+package starling.filters;
 
 import openfl.Vector;
 import openfl.display3D.Context3D;
@@ -33,24 +33,22 @@ import starling.rendering.Program;
  * Creates a Vignette effect on images with an option sepia tone
  * @author Matse
  */
-class VignetteFilter extends FragmentFilter 
-{
+class VignetteFilter extends FragmentFilter {
 	public var centerX(get, set):Float;
 	public var centerY(get, set):Float;
 	public var amount(get, set):Float;
 	public var radius(get, set):Float;
 	public var size(get, set):Float;
 	public var useSepia(get, set):Bool;
-	
+
 	private var _centerX:Float;
 	private var _centerY:Float;
 	private var _amount:Float;
 	private var _radius:Float;
 	private var _size:Float;
 	private var _useSepia:Bool;
-	
-	public function new(size:Float = 0.5, radius:Float = 1.0, amount:Float = 0.7, cx:Float = 0.5, cy:Float = 0.5, sepia:Bool = true) 
-	{
+
+	public function new(size:Float = 0.5, radius:Float = 1.0, amount:Float = 0.7, cx:Float = 0.5, cy:Float = 0.5, sepia:Bool = true) {
 		this._centerX = cx;
 		this._centerY = cy;
 		this._amount = amount;
@@ -59,69 +57,80 @@ class VignetteFilter extends FragmentFilter
 		this._useSepia = sepia;
 		super();
 	}
-	
+
 	/** Center X */
-	private function get_centerX():Float { return this._centerX; }
-	private function set_centerX(value:Float):Float
-	{
+	private function get_centerX():Float {
+		return this._centerX;
+	}
+
+	private function set_centerX(value:Float):Float {
 		this._centerX = value;
 		cast(this.effect, VignetteEffect).centerX = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
+
 	/** Center Y */
-	private function get_centerY():Float { return this._centerY; }
-	private function set_centerY(value:Float):Float
-	{
+	private function get_centerY():Float {
+		return this._centerY;
+	}
+
+	private function set_centerY(value:Float):Float {
 		this._centerY = value;
 		cast(this.effect, VignetteEffect).centerY = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
+
 	/** Amount */
-	private function get_amount():Float { return this._amount; }
-	private function set_amount(value:Float):Float
-	{
+	private function get_amount():Float {
+		return this._amount;
+	}
+
+	private function set_amount(value:Float):Float {
 		this._amount = value;
 		cast(this.effect, VignetteEffect).amount = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
+
 	/** Radius */
-	private function get_radius():Float { return this._radius; }
-	private function set_radius(value:Float):Float
-	{
+	private function get_radius():Float {
+		return this._radius;
+	}
+
+	private function set_radius(value:Float):Float {
 		this._radius = value;
 		cast(this.effect, VignetteEffect).radius = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
+
 	/** Size */
-	private function get_size():Float { return this._size; }
-	private function set_size(value:Float):Float
-	{
+	private function get_size():Float {
+		return this._size;
+	}
+
+	private function set_size(value:Float):Float {
 		this._size = value;
 		cast(this.effect, VignetteEffect).size = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
+
 	/** Use Sepia */
-	private function get_useSepia():Bool { return this._useSepia; }
-	private function set_useSepia(value:Bool):Bool
-	{
+	private function get_useSepia():Bool {
+		return this._useSepia;
+	}
+
+	private function set_useSepia(value:Bool):Bool {
 		this._useSepia = value;
 		cast(this.effect, VignetteEffect).useSepia = value;
 		setRequiresRedraw();
 		return value;
 	}
-	
-	override private function createEffect():FilterEffect
-	{
+
+	override private function createEffect():FilterEffect {
 		var effect:VignetteEffect = new VignetteEffect();
 		effect.centerX = this._centerX;
 		effect.centerY = this._centerY;
@@ -133,29 +142,26 @@ class VignetteFilter extends FragmentFilter
 	}
 }
 
-
-class VignetteEffect extends FilterEffect
-{
+class VignetteEffect extends FilterEffect {
 	public var centerX:Float;
 	public var centerY:Float;
 	public var amount:Float;
 	public var radius:Float;
 	public var size:Float;
 	public var useSepia:Bool;
-	
+
 	private var center:Vector<Float> = Vector.ofArray([1.0, 1.0, 1.0, 1.0]);
 	private var vars:Vector<Float> = Vector.ofArray([0.5, 0.5, 0.5, 0.5]);
-	
+
 	private var sepia1:Vector<Float> = Vector.ofArray([0.393, 0.769, 0.189, 0.000]);
 	private var sepia2:Vector<Float> = Vector.ofArray([0.349, 0.686, 0.168, 0.000]);
 	private var sepia3:Vector<Float> = Vector.ofArray([0.272, 0.534, 0.131, 0.000]);
-	
+
 	private var noSepia1:Vector<Float> = Vector.ofArray([1.0, 0.0, 0.0, 0.000]);
 	private var noSepia2:Vector<Float> = Vector.ofArray([0.0, 1.0, 0.0, 0.000]);
 	private var noSepia3:Vector<Float> = Vector.ofArray([0.0, 0.0, 1.0, 0.000]);
-	
-	override private function createProgram():Program
-    {
+
+	override private function createProgram():Program {
 		var fragmentShader:String = [
 			"sub ft0.xy, v0.xy, fc0.xy",
 			"mov ft2.x, fc1.w",
@@ -178,36 +184,35 @@ class VignetteEffect extends FilterEffect
 			"dp3 ft2.x, ft1, fc2",
 			"dp3 ft2.y, ft1, fc3",
 			"dp3 ft2.z, ft1, fc4",
-			
+
 			"mul ft6.xyz, ft6.xyz, ft2.xyz",
 			"mov ft6.w, ft1.w",
 			"mov oc, ft6",
 		].join("\n");
-		
+
 		return Program.fromSource(FilterEffect.STD_VERTEX_SHADER, fragmentShader);
 	}
-	
-	override private function beforeDraw(context:Context3D):Void
-    {
+
+	override private function beforeDraw(context:Context3D):Void {
 		var halfSize:Float = this.size * 0.5;
 		this.center[0] = this.centerX - halfSize;
 		this.center[1] = this.centerY - halfSize;
-		
+
 		this.vars[0] = this.amount;
 		this.vars[1] = this.radius;
 		this.vars[3] = this.size;
-		
+
 		// to sepia or not to sepia
 		var s1:Vector<Float> = this.useSepia ? this.sepia1 : this.noSepia1;
 		var s2:Vector<Float> = this.useSepia ? this.sepia2 : this.noSepia2;
 		var s3:Vector<Float> = this.useSepia ? this.sepia3 : this.noSepia3;
-		
+
 		context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 0, this.center, 1);
-        context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 1, this.vars, 1);
-        context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 2, s1, 1);
-        context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 3, s2, 1);
-        context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 4, s3, 1);
-		
+		context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 1, this.vars, 1);
+		context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 2, s1, 1);
+		context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 3, s2, 1);
+		context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 4, s3, 1);
+
 		super.beforeDraw(context);
 	}
 }
